@@ -34,8 +34,10 @@ public class Unit {
 		//this.totalAssessedPercentage += assessments.get(assessments.size()-1).getPercentage();
 		this.totalAssessedPercentageWeight += assessments.get(assessments.size()-1).getPercentageWeight();
 		this.totalAssessedWeight += assessments.get(assessments.size()-1).getWeight();
-		
-		 
+	}
+	
+	private double getFinalAssessmentScore(double marksNeeded, double totalAssessedWeight) {
+		return marksNeeded/(100-totalAssessedWeight)*100;
 	}
 	
 	public String getAnalysis(){
@@ -47,10 +49,16 @@ public class Unit {
 		this.P -= this.totalAssessedPercentageWeight;
 		returnString += ("Your current mark is: " + Math.round(totalAssessedPercentageWeight)+ "%\n");
 		returnString += ("out of: " + Math.round(totalAssessedWeight)+ "% of the unit.\n");
-		returnString += ("You need " + Math.round(HD) + "% more to get an HD\n");
-		returnString += ("You need " + Math.round(D) + "% more to get a D\n");
-		returnString += ("You need " + Math.round(C) + "% more to get a C\n");
-		returnString += ("You need " + Math.round(P) + "% more to get a P\n");
+		
+		double[] grades = {this.HD, this.D, this.C, this.P};
+		String[] gradeText = {"HD", "D", "C", "P"};
+		double remainingWeight = 100-totalAssessedWeight;
+		int counter = 0;
+		
+		for(double grade : grades) {
+			returnString += ("You need " + Math.round(grade) + "/" + Math.round(remainingWeight)  + " to get "+ gradeText[counter] + " (" + Math.round(getFinalAssessmentScore(grade, totalAssessedWeight)) + "%)\n");
+			counter++;
+		}
 		
 	return returnString;
 	}

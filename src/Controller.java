@@ -70,6 +70,13 @@ public class Controller {
 		System.out.println(unitPoverty.getName() + "\n" + unitPoverty.getAnalysis());
 //Change percentages to 2 decimals
 
+		
+		/*Ethics of war*/
+		Unit unitEow = new Unit("Ethics of War");
+		unitEow.addAssessment("Writing exercise", 90, 100, 15);
+		unitEow.addAssessment("Essay", 90, 100, 40);
+		unitEow.addAssessment("Tute participation", 13.5, 15, 15);
+		System.out.println(unitEow.getName() + "\n" + unitEow.getAnalysis());
 
 	}
 
